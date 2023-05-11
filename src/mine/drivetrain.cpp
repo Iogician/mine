@@ -9,9 +9,9 @@ namespace drivetrain {
 
     void move(int strafe, int throttle, int turn)
     {
-        LF.move(throttle + turn - strafe);
-        RF.move(throttle - turn + strafe);
-        LB.move(throttle + turn + strafe);
-        RB.move(throttle - turn - strafe);
+        LF.move(throttle + turn - (strafe * (1 - COG_SHIFT)));
+        RF.move(throttle - turn + (strafe * (1 - COG_SHIFT)));
+        LB.move(throttle + turn + (strafe * (1 + COG_SHIFT)));
+        RB.move(throttle - turn - (strafe * (1 + COG_SHIFT)));
     }
 }
