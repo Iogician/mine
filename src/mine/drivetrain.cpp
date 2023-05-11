@@ -11,7 +11,7 @@ namespace drivetrain {
     {
         LF.move(throttle + turn - strafe);
         RF.move(throttle - turn + strafe);
-        LB.move(throttle + turn - strafe);
-        RB.move(throttle - turn + strafe);
+        LB.move(throttle + turn + strafe);
+        RB.move(throttle - turn - strafe);
     }
 }
