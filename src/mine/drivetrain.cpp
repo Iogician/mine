@@ -1,4 +1,5 @@
 #include "mine/robot.hpp"
+#include "pros/adi.hpp"
 #include "pros/motors.h"
 
 namespace drivetrain {
@@ -6,6 +7,7 @@ namespace drivetrain {
     Motor RF(-RF_PORT, E_MOTOR_GEAR_600);
     Motor LB(LB_PORT, E_MOTOR_GEAR_600);
     Motor RB(-RB_PORT, E_MOTOR_GEAR_600);
+    ADIGyro gyro(8);
 
     void move(int strafe, int throttle, int turn)
     {
@@ -13,5 +15,14 @@ namespace drivetrain {
         RF.move(throttle - turn + (strafe * (1 - COG_SHIFT)));
         LB.move(throttle + turn + (strafe * (1 + COG_SHIFT)));
         RB.move(throttle - turn - (strafe * (1 + COG_SHIFT)));
+    }
+    float getHeading()
+    {
+        float heading = gyro.get_value();
+        heading /= 10;
+        if (heading < 0) {
+            heading += 360.0;
+        }
+        return heading;
     }
 }

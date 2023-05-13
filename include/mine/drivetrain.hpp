@@ -12,6 +12,8 @@ namespace drivetrain {
     extern Motor RF;
     extern Motor LB;
     extern Motor RB;
+    extern ADIGyro gyro;
     
     void move(int, int, int);
+    float getHeading(void);
 }

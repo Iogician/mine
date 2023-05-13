@@ -1,5 +1,8 @@
 #include "mine/robot.hpp"
+#include "pros/llemu.hpp"
+#include <string>
 
+using namespace std;
 using namespace pros;
 
 namespace driver {
@@ -20,6 +23,25 @@ namespace driver {
         else if (R2) intake::run(-100);
         else intake::run(0);
     }  
+    int refresh = 0;
+    void feedback() {
+        refresh += 2;
+
+        int ballProximity = intake::proximityCheck();
+        if (intake::targetSpeed > 0 && ballProximity >= PROXIMITY_THRESHOLD) ctrl.rumble(".");
+        
+        if (refresh >= REFRESH_RATE) {
+            refresh = 0;
+            float heading = drivetrain::getHeading();
+            int hue = intake::sensor.get_hue();
+            int saturation = intake::sensor.get_saturation();
+            int brightness = intake::sensor.get_brightness();
+
+            lcd::set_text(1, "Heading: " + to_string(heading));
+            lcd::set_text(2, "Proximity: " + to_string(ballProximity));
+            lcd::set_text(3, "Object HSV: (" + to_string(hue) + ", " + to_string(saturation) + ", " + to_string(brightness) + ")");
+        }
+    }
 }
 
 namespace programming {

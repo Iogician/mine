@@ -4,9 +4,11 @@
 using namespace pros;
 
 void initialize() {
-	pros::lcd::initialize();
-	pros::lcd::set_background_color(227,28,121);
-	pros::lcd::clear();
+	lcd::initialize();
+	lcd::set_background_color(227,28,121);
+	lcd::set_text_color(0,0,0);
+	lcd::clear();
+	drivetrain::gyro.reset();
 }
 
 void disabled() {}
@@ -22,6 +24,7 @@ void opcontrol() {
 	while (true) {
 		analogInputs();
 		digitalInputs();
+		feedback();
 
 		delay(2);
 	}
