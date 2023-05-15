@@ -8,6 +8,8 @@ namespace drivetrain {
     Motor LB(LB_PORT, E_MOTOR_GEAR_600);
     Motor RB(-RB_PORT, E_MOTOR_GEAR_600);
     ADIGyro gyro(8);
+    Distance distanceSensor(13);
+    ADIUltrasonic ultrasonic(3, 4);
 
     void move(int strafe, int throttle, int turn)
     {
@@ -24,5 +26,16 @@ namespace drivetrain {
             heading += 360.0;
         }
         return heading;
+    }
+    int getDistance(char axis)
+    {
+        int distance = PROS_ERR;
+        if (axis == 'X') {
+            distance = distanceSensor.get() / 10;
+        }
+        else {
+            distance = ultrasonic.get_value();
+        }
+        return distance;
     }
 }

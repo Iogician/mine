@@ -15,7 +15,7 @@ namespace intake {
         percent /= 100;
         motors.set_brake_modes(E_MOTOR_BRAKE_BRAKE);
         motors.move_voltage(MAX_VOLTAGE * percent);
-        
+
         if (time > 0) {
             delay(time);
             motors.move_voltage(0);

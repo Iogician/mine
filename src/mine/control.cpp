@@ -33,13 +33,16 @@ namespace driver {
         if (refresh >= REFRESH_RATE) {
             refresh = 0;
             float heading = drivetrain::getHeading();
+            int X = drivetrain::getDistance('X');
+            int Y = drivetrain::getDistance('Y');
             int hue = intake::sensor.get_hue();
             int saturation = intake::sensor.get_saturation();
             int brightness = intake::sensor.get_brightness();
 
             lcd::set_text(1, "Heading: " + to_string(heading));
-            lcd::set_text(2, "Proximity: " + to_string(ballProximity));
-            lcd::set_text(3, "Object HSV: (" + to_string(hue) + ", " + to_string(saturation) + ", " + to_string(brightness) + ")");
+            lcd::set_text(2, "Coordinates: (" + to_string(X) + ", " + to_string(Y) + ")");
+            lcd::set_text(3, "Proximity: " + to_string(ballProximity));
+            lcd::set_text(4, "Object HSV: (" + to_string(hue) + ", " + to_string(saturation) + ", " + to_string(brightness) + ")");
         }
     }
 }

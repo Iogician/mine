@@ -1,4 +1,6 @@
 #include "main.h"
+#include "pros/adi.hpp"
+#include "pros/distance.hpp"
 
 using namespace pros;
 
@@ -13,7 +15,10 @@ namespace drivetrain {
     extern Motor LB;
     extern Motor RB;
     extern ADIGyro gyro;
-    
+    extern Distance distance;
+    extern ADIUltrasonic ultrasonic;
+
     void move(int, int, int);
     float getHeading(void);
+    int getDistance(char);
 }
