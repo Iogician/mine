@@ -3,6 +3,7 @@
 #include "subsystems.hpp"
 
 using namespace pros;
+using namespace std;
 
 #define MAX_VOLTAGE 12000 //in millivolts
 #define MAX_POWER 127 //pros units

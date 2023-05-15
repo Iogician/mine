@@ -1,7 +1,4 @@
 #include "mine/robot.hpp"
-#include "pros/adi.hpp"
-#include "pros/motors.h"
-#include "pros/motors.hpp"
 
 namespace drivetrain {
     Motor LF(LF_PORT, E_MOTOR_GEAR_600);
@@ -61,7 +58,7 @@ namespace drivetrain {
             initializeEncoders();
             double currentPosition = inInches(RF.get_position());
             while (!inRange(currentPosition, distance, LINEAR_TOLERANCE)) {
-                turn(maintainedHeading, 50);
+                turn(maintainedHeading, 35);
                 currentPosition = inInches(RF.get_position());
                 double power;
                 if (currentPosition < distance) {
@@ -73,7 +70,11 @@ namespace drivetrain {
                 }
                 if (power > 1) power = 1;
                 else if (power < -1) power = -1;
-                power *= speed;                
+                power *= speed;       
+                //debug stuff
+                lcd::set_text(1, "Position: " + to_string(currentPosition));
+                lcd::set_text(2, "Linear Diff: " + to_string(distance - currentPosition));
+                lcd::set_text(3, "Drive Power: " + to_string(power));                             
                 move(power * (type == 'X'), power * (type == 'Y'), 0);
                 delay(2);
             }
@@ -81,7 +82,7 @@ namespace drivetrain {
         else if (mode == USE_SENSOR) {
             double currentDistance = getDistance(type);
             while (!inRange(currentDistance, distance, LINEAR_TOLERANCE)) {
-                turn(maintainedHeading, 50);
+                turn(maintainedHeading, 35);
                 currentDistance = RF.get_position();
                 double power;
                 if (currentDistance < distance) {
@@ -94,6 +95,10 @@ namespace drivetrain {
                 if (power > 1) power = 1;
                 else if (power < -1) power = -1;
                 power *= speed;
+                //debug stuff
+                lcd::set_text(1, "Position: " + to_string(currentDistance));
+                lcd::set_text(2, "Linear Diff: " + to_string(distance - currentDistance));
+                lcd::set_text(3, "Drive Power: " + to_string(power));                
                 move(power * (type == 'X'), power * (type == 'Y'), 0);
                 delay(2);
             }           
@@ -108,29 +113,30 @@ namespace drivetrain {
 
         while (!inRange(current, heading, ANGULAR_TOLERANCE)) {
             current = getHeading();
-            double adjusted = current;
+            float adjusted = current;
 
             if (current > 180 && heading < 180) adjusted -= 360;
             else if (current < 180 && heading > 180) adjusted += 360;
 
             current = adjusted;            
-            double angleDifference = fabs(heading - current);
+            float angleDifference = fabs(heading - current);
 
-            int direction = 0;
+            float direction = 0;
 
             if (current < heading) direction = 1;
             else if (current > heading) direction = -1;
             else direction = 0;
-
             if (angleDifference < ANGULAR_TOLERANCE) power = 0;
             else {
-                double powerRatio = 0;
-                if (current > heading) powerRatio = ((current - heading)/current) * ANGULAR_KP;
-                else if (current < heading) powerRatio = ((heading - current)/heading) * ANGULAR_KP;
-                if (powerRatio > 1) powerRatio = 1;
-                power = fabs(powerRatio) * (float) direction;
+                power = (angleDifference / 360) * ANGULAR_KP;
+                power = fabs(power) * direction;
             };
             power *= speed;
+
+            //debug stuff
+            lcd::set_text(5, "Heading: " + to_string(getHeading()));
+            lcd::set_text(6, "Angular Diff: " + to_string(angleDifference));
+            lcd::set_text(7, "Turn Power: " + to_string((int) power));
 
             move(0, 0, power);
 

@@ -52,7 +52,7 @@ namespace programming {
 
     void autonomous1() {
         driver::ctrl.rumble(".");
-        drivetrain::turn(90, 50);
+        drivetrain::turn(90, 75);
     }
     void autonomous2() {
         driver::ctrl.rumble("..");

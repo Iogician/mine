@@ -9,13 +9,13 @@ namespace drivetrain {
     #define LB_PORT 12
     #define RB_PORT 19
     //scalars
-    #define LINEAR_KP 4
-    #define ANGULAR_KP 2.5
+    #define LINEAR_KP 4.0
+    #define ANGULAR_KP 2.875
     #define COG_SHIFT 0.105 //a positive double will shift it forward; negative double shifts it backwards
     //odometry
     #define WHEEL_DIAMETER 2.00
     #define LINEAR_TOLERANCE 1.0
-    #define ANGULAR_TOLERANCE 0.5
+    #define ANGULAR_TOLERANCE 0.25
     //function constants
     #define USE_ENCODER false
     #define USE_SENSOR true  
