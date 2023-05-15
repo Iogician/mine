@@ -49,4 +49,20 @@ namespace driver {
 
 namespace programming {
     int routine = 1;
+
+    void autonomous1() {
+        driver::ctrl.rumble(".");
+        drivetrain::turn(90, 50);
+    }
+    void autonomous2() {
+        driver::ctrl.rumble("..");
+    }
+    void autonomous3() {
+        driver::ctrl.rumble("...");
+    }
+    void runRoutine() {
+        if (routine == 1) autonomous1();
+        else if (routine == 2) autonomous2();
+        else if (routine == 3) autonomous3();
+    }
 }

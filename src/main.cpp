@@ -15,9 +15,12 @@ void disabled() {}
 
 void competition_initialize() {}
 
-void autonomous() {}
-
+using namespace programming;
 using namespace driver;
+
+void autonomous() {
+	runRoutine();
+}
 
 void opcontrol() {
 

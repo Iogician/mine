@@ -96,5 +96,37 @@ namespace drivetrain {
     }
     void turn(float heading, int speed) {
         maintainedHeading = heading;
+        float power = 0;
+        float current = getHeading();
+        double adjusted;
+
+        if (current > 180 && heading < 180) adjusted -= 360;
+        else if (current < 180 && heading > 180) adjusted += 360;
+
+        current = adjusted;
+
+        while (!inRange(current, heading, ANGULAR_TOLERANCE)) {
+            double angleDifference = fabs(heading - current);
+
+            int direction = 0;
+
+            if (current < heading) direction = 1;
+            else if (current > heading) direction = -1;
+            else direction = 0;
+
+            if (angleDifference < ANGULAR_TOLERANCE) power = 0;
+            else {
+                double powerRatio = 0;
+                if (current > heading) powerRatio = ((current - heading)/current) * ANGULAR_KP;
+                else if (current < heading) powerRatio = ((heading - current)/heading) * ANGULAR_KP;
+                if (powerRatio > 1) powerRatio = 1;
+                power = fabs(powerRatio) * (float) direction;
+            };
+            power *= speed;
+
+            move(0, 0, power);
+
+            delay(2);
+        }
     }
 }
