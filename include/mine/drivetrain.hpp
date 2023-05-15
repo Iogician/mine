@@ -1,7 +1,4 @@
 #include "main.h"
-#include "pros/adi.hpp"
-#include "pros/distance.hpp"
-#include "pros/motors.hpp"
 
 using namespace pros;
 
@@ -13,7 +10,7 @@ namespace drivetrain {
     #define RB_PORT 19
     //scalars
     #define LINEAR_KP 4
-    #define ANGULAR_KP 4
+    #define ANGULAR_KP 2.5
     #define COG_SHIFT 0.105 //a positive double will shift it forward; negative double shifts it backwards
     //odometry
     #define WHEEL_DIAMETER 2.00
@@ -38,6 +35,7 @@ namespace drivetrain {
     void move(int, int, int);
     float getHeading(void);
     int getDistance(char);
+    void brake(bool mode = true);
     void drive(char, double, int speed = 127, bool mode = USE_ENCODER);
     void turn(float, int speed = 127);
 }

@@ -38,6 +38,10 @@ namespace drivetrain {
         else distance = ultrasonic.get_value();
         return distance;
     }
+    void brake(bool mode) {
+        if (mode) ALL.set_brake_modes(E_MOTOR_BRAKE_BRAKE);
+        else ALL.set_brake_modes(E_MOTOR_BRAKE_COAST);
+    }
     void initializeEncoders()
     {
         ALL.set_encoder_units(E_MOTOR_ENCODER_ROTATIONS);
@@ -52,6 +56,7 @@ namespace drivetrain {
         return yes;
     }
     void drive(char type, double distance, int speed, bool mode) {
+        brake();
         if (mode == USE_ENCODER) {
             initializeEncoders();
             double currentPosition = inInches(RF.get_position());
@@ -98,14 +103,17 @@ namespace drivetrain {
         maintainedHeading = heading;
         float power = 0;
         float current = getHeading();
-        double adjusted;
 
-        if (current > 180 && heading < 180) adjusted -= 360;
-        else if (current < 180 && heading > 180) adjusted += 360;
-
-        current = adjusted;
+        brake();
 
         while (!inRange(current, heading, ANGULAR_TOLERANCE)) {
+            current = getHeading();
+            double adjusted = current;
+
+            if (current > 180 && heading < 180) adjusted -= 360;
+            else if (current < 180 && heading > 180) adjusted += 360;
+
+            current = adjusted;            
             double angleDifference = fabs(heading - current);
 
             int direction = 0;

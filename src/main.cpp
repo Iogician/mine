@@ -24,6 +24,8 @@ void autonomous() {
 
 void opcontrol() {
 
+	drivetrain::brake(false);
+
 	while (true) {
 		analogInputs();
 		digitalInputs();
