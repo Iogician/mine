@@ -5,6 +5,7 @@
 using namespace pros;
 
 #define MAX_VOLTAGE 12000 //in millivolts
+#define MAX_POWER 127 //pros units
 #define REFRESH_RATE 50 //in milliseconds
 
 namespace driver {
