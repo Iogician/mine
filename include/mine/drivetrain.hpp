@@ -11,7 +11,7 @@ namespace drivetrain {
     //scalars
     #define LINEAR_KP 4.0
     #define ANGULAR_KP 2.875
-    #define COG_SHIFT 0.105 //a positive double will shift it forward; negative double shifts it backwards
+    #define COG_SHIFT 0.15 //a positive double will shift it forward; negative double shifts it backwards
     //odometry
     #define WHEEL_DIAMETER 2.00
     #define LINEAR_TOLERANCE 1.0

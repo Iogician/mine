@@ -19,7 +19,7 @@ namespace driver {
         bool R1 = ctrl.get_digital(E_CONTROLLER_DIGITAL_R1);
         bool R2 = ctrl.get_digital(E_CONTROLLER_DIGITAL_R2);
 
-        if (R1) intake::run();
+        if (R1) intake::run(50);
         else if (R2) intake::run(-100);
         else intake::run(0);
     }  
