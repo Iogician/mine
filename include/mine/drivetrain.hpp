@@ -4,16 +4,16 @@ using namespace pros;
 
 namespace drivetrain {
     //initialization
-    #define LF_PORT 5
-    #define RF_PORT 10
+    #define LF_PORT 7
+    #define RF_PORT 9
     #define LB_PORT 12
-    #define RB_PORT 19
+    #define RB_PORT 13
     //scalars
     #define LINEAR_KP 4.0
     #define ANGULAR_KP 2.875
-    #define COG_SHIFT 0.15 //a positive double will shift it forward; negative double shifts it backwards
+    #define COG_SHIFT 0.0 //a positive double will shift it forward; negative double shifts it backwards
     //odometry
-    #define WHEEL_DIAMETER 2.00
+    #define WHEEL_DIAMETER 4.125
     #define LINEAR_TOLERANCE 1.0
     #define ANGULAR_TOLERANCE 0.25
     //function constants

@@ -3,9 +3,9 @@
 using namespace pros;
 
 namespace intake {
-    #define INTAKE_PORT1 -6
-    #define INTAKE_PORT2 -9
-    #define OPTICAL_PORT 7
+    #define INTAKE_PORT1 -0
+    #define INTAKE_PORT2 -0
+    #define OPTICAL_PORT 0
     #define PROXIMITY_THRESHOLD 245
 
     extern int targetSpeed;

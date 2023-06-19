@@ -14,10 +14,10 @@ namespace drivetrain {
 
     void move(int strafe, int throttle, int turn)
     {
-        LF.move(throttle + turn - (strafe * (1 - COG_SHIFT)));
-        RF.move(throttle - turn + (strafe * (1 - COG_SHIFT)));
-        LB.move(throttle + turn + (strafe * (1 + COG_SHIFT)));
-        RB.move(throttle - turn - (strafe * (1 + COG_SHIFT)));
+        LF.move(throttle + turn + (strafe * (1 - COG_SHIFT)));
+        RF.move(throttle - turn - (strafe * (1 - COG_SHIFT)));
+        LB.move(throttle + turn - (strafe * (1 + COG_SHIFT)));
+        RB.move(throttle - turn + (strafe * (1 + COG_SHIFT)));
     }
     float getHeading()
     {
