@@ -6,8 +6,8 @@ namespace drivetrain {
     Motor LB(LB_PORT, E_MOTOR_GEAR_600);
     Motor RB(-RB_PORT, E_MOTOR_GEAR_600);
     MotorGroup ALL({LF, RF, LB, RB});
-    ADIGyro gyro(8);
-    Distance distanceSensor(13);
+    ADIGyro gyro(2);
+    Distance distanceSensor(14);
     ADIUltrasonic ultrasonic(3, 4);
 
     float maintainedHeading = 0;
